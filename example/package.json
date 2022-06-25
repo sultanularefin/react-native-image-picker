@@ -6,8 +6,21 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "ios2": "react-native run-ios --device 'Beyourself Ventures’s iPhone'",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "build": "cd android && ./gradlew bundleRelease",
+    "clean": "cd android && ./gradlew clean",
+    "apk": "cd android && ./gradlew assembleRelease",
+    "device": "react-native run-android --deviceId 68efca1a",
+    "cc": "react-native start --reset-cache",
+    "log-ios": "npx react-native log-ios",
+    "log-android": "npx react-native log-android",
+    "lint": "eslint .",
+    "loadAPK": "npx react-native run-android --variant=release",
+    "del": "cd android && rm -rf build && cd app && rm -rf build",
+    "delW": "cd android && rmdir build /s /q && cd app && rmdir build /s /q",
+    "new": "yarn clean && yarn del && yarn apk"
   },
   "dependencies": {
     "react": "17.0.2",
