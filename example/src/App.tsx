@@ -2,7 +2,19 @@ import * as React from 'react';
 import {StyleSheet, SafeAreaView, View, Image, ScrollView} from 'react-native';
 import {DemoTitle, DemoButton, DemoResponse} from './components';
 
-import * as ImagePicker from 'react-native-image-picker';
+// import * as ImagePicker from 'react-native-image-picker';
+
+import {
+  ImageLibraryOptions,
+  CameraOptions,
+  Asset,
+  ImagePickerResponse,
+  MediaType,
+  PhotoQuality,
+  AndroidVideoOptions,
+  iOSVideoOptions
+} from "react-native-image-picker/src/types";
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 /* toggle includeExtra */
 const includeExtra = true;
@@ -12,9 +24,11 @@ export default function App() {
 
   const onButtonPress = React.useCallback((type, options) => {
     if (type === 'capture') {
-      ImagePicker.launchCamera(options, setResponse);
+      // ImagePicker.launchCamera(options, setResponse);
+      launchCamera(options, setResponse);
     } else {
-      ImagePicker.launchImageLibrary(options, setResponse);
+      launchImageLibrary(options, setResponse);
+      // ImagePicker.launchImageLibrary(options, setResponse);
     }
   }, []);
 
@@ -36,7 +50,9 @@ export default function App() {
         <DemoResponse>{response}</DemoResponse>
 
         {response?.assets &&
-          response?.assets.map(({uri}) => (
+          response?.assets.map(({
+                                  uri
+          }) => (
             <View key={uri} style={styles.image}>
               <Image
                 resizeMode="cover"
@@ -71,7 +87,8 @@ const styles = StyleSheet.create({
 interface Action {
   title: string;
   type: 'capture' | 'library';
-  options: ImagePicker.CameraOptions | ImagePicker.ImageLibraryOptions;
+  // options: ImagePicker.CameraOptions | ImagePicker.ImageLibraryOptions;
+  options: CameraOptions | ImageLibraryOptions;
 }
 
 const actions: Action[] = [
